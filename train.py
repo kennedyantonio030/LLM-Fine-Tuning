@@ -8,7 +8,6 @@ from utils import *
 def main():
     args = parse_arguments()
 
-    # Load the config based on user input or default
     cfg = get_config(f"{args.model}")
 
     model_cfg = cfg.model
@@ -22,7 +21,6 @@ def main():
     logger.info(f"Output Directory: {output_dir}")
     logger.info(f"Training Epochs: {train_cfg.epochs}")
 
-    # Load dataset
     dataset = load_dataset(dataset_cfg.id)
     train_dataset, eval_dataset = prepare_datasets(
         dataset, dataset_cfg.instruction_column_name, dataset_cfg.response_column_name
@@ -46,7 +44,6 @@ def main():
     peft_config = create_peft_config(cfg.model)
     sft_config = create_sft_config(cfg.training_arguments, output_dir)
 
-    # Initialize trainer and start training
     formatting_func = lambda example: formatting_prompts_func(example, tokenizer)
     trainer = SFTTrainer(
         model=model,
