@@ -37,7 +37,6 @@ def main():
 
     model = load_model(cfg.model, quantization_config, device)
 
-    # Generate a response for the first example in the validation dataset
     example1 = eval_dataset[0]
     response = generate_response(model, tokenizer, example1["instruction"], device)
 
@@ -65,7 +64,6 @@ def main():
     if cfg.hugging_face.push_to_hub and (token := cfg.hugging_face.token):
         trainer.push_to_hub(token=token)
 
-    # Load the fine-tuned model and generate response to compare with the base model
     ft_model = AutoModelForCausalLM.from_pretrained(output_dir).to(device)
     response = generate_response(ft_model, tokenizer, example1["instruction"], device)
 

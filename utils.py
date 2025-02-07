@@ -163,7 +163,6 @@ def create_sft_config(train_cfg, output_dir):
 
 
 def formatting_prompts_func(example: dict, tokenizer) -> str:
-    """Format chat prompt for training."""
     chat = [
         {"role": "user", "content": example["instruction"]},
         {"role": "assistant", "content": example["response"]},
@@ -173,7 +172,6 @@ def formatting_prompts_func(example: dict, tokenizer) -> str:
 
 
 def print_example(example):
-    """Print an example from the dataset."""
     print(f"Original Dataset Example:")
     print(f"Instruction: {example['instruction']}")
     print(f"Response: {example['response']}")
@@ -181,7 +179,6 @@ def print_example(example):
 
 
 def print_response(response):
-    """Print the model's response."""
     print(f"Model response:")
     print(response.split("assistant\n")[-1])
     print("-" * 100)
